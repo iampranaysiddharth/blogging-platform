@@ -1,0 +1,15 @@
+from flask import Flask, request
+
+app = Flask(__name__)
+posts = []
+
+@app.route('/add', methods=['POST'])
+def add_post():
+    posts.append(request.json['content'])
+    return {"message": "Post added"}
+
+@app.route('/posts')
+def get_posts():
+    return {"posts": posts}
+
+app.run(debug=True)
